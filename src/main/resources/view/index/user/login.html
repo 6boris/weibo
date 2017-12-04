@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.springframework.org/schema/data/jaxb" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>登录</title>
+
+
+
+    <link rel="stylesheet" href="/index/css/login.css" />
+    <script type="text/javascript" src='/index/js/jquery-1.7.2.min.js'></script>
+
+    <js file='./js/jquery-1.7.2.min.js'/>
+    <js file='./js/jquery-validate.js'/>
+    <js file='./js/login.js'/>
+</head>
+<body>
+<div id='top-bg'></div>
+<div id='login-form'>
+    <div id='login-wrap'>
+        <p>还没有微博帐号？<a th:href="@{/register}">立即注册</a></p>
+
+            <fieldset>
+                <legend>用户登录</legend>
+                <p>
+                    <label for="account">登录账号：</label>
+                    <input type="text" name='account' class='input'/>
+                </p>
+                <p>
+                    <label for="pwd">密码：</label>
+                    <input type="password" name='pwd' class='input'/>
+                </p>
+                <p>
+                    <input type="checkbox" name='auto' checked='1' class='auto' id='auto'/>
+                    <label for="auto">下次自动登录</label>
+                </p>
+                <p>
+                    <input type="submit" value='马上登录' id='login'/>
+                </p>
+            </fieldset>
+
+    </div>
+</div>
+
+<script>
+
+    $("#login").click(function(){
+        $.ajax({
+            type:"POST",
+            url:"/api/login",
+            datatype: "JSON",
+            data:{
+                Name:"sanmao",
+                Password:"sanmaoword"
+            },
+            success:function(data){
+                data = $.parseJSON(data);
+                console.log(data);
+                console.log(data.data);
+                console.log($.parseJSON(data.data));
+            },
+            error: function(){
+
+            }
+        });
+    });
+
+
+</script>
+
+</body>
+</html>
