@@ -4,6 +4,8 @@ import com.weibo.bean.User;
 import com.weibo.service.UserService;
 import org.apache.catalina.Session;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.jasypt.encryption.StringEncryptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,15 +19,20 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Controller
+@RestController
 public class DemoController {
 
     @Resource
     private UserService userService;
 
+    @Autowired
+    StringEncryptor stringEncryptor;
+
     @RequestMapping(value = "demo")
-    public List<User> demo(){
-        List<User> user = userService.getAll();
+    public User demo(){
+        User user = userService.findById(1);
+        user.setPassword(stringEncryptor.encrypt("admin"));
+        userService.save(user);
         return user;
 
     }

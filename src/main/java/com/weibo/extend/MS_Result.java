@@ -8,11 +8,20 @@ import java.text.ParseException;
 import java.util.Objects;
 
 public class MS_Result {
+//    状态数值，0表示成功，非零表示失败
     private Integer status;
 
+//    提示信息
     private String messages;
 
+//    返回的数据
     private String data;
+
+    public void setAll(Integer status, String messages , String data){
+        this.status = status;
+        this.messages = messages;
+        this.data = data;
+    }
 
     public Integer getStatus() {
         return status;

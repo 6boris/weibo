@@ -40,5 +40,7 @@ public class UserService {
         return userDao.findAll();
     }
 
-
+    public List<User> findByName(String name){
+        return userDao.findByName(name);
+    }
 }

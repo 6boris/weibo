@@ -40,16 +40,16 @@ public class SessionController {
     }
 
     @RequestMapping("/demo/session")
-    public void json(HttpServletRequest request, HttpSession session)  throws ParseException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        User user = new User();
-        user.setId('1');
-        user.setUsername("嘿嘿嘿");
-        user.setPassword("123456");
 
-        String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+    public void json(HttpServletRequest request,
+                     HttpSession session
+                    )  throws ParseException, IOException {
 
-        System.out.print(json);
+       toJson json = new toJson();
+       String res = json.toForMatJson(session);
+
+       System.out.println(res);
+
     }
 
 }
