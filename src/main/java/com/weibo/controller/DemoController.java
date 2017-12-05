@@ -19,7 +19,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@RestController
+@Controller
 public class DemoController {
 
     @Resource
@@ -48,11 +48,19 @@ public class DemoController {
 
     @RequestMapping(value = "/user")
 
-    public String userlist(Model model){
-        List<User> user = userService.getAll();
+    public String userlist(Model model,HttpServletRequest request){
+//        List<User> user = userService.getAll();
+//        model.addAttribute("users", user) ;
+//        System.out.print(user.get(1).getUsername());
+//        Integer uid = Integer.valueOf(request.getSession().getAttribute("uid").toString());
+//        User user = userService.findById(uid);
+
+        List<User> user = userService.findAll();
+
         model.addAttribute("users", user) ;
-        System.out.print(user.get(1).getUsername());
-        return "userlist";
+
+
+        return "/index/userlist";
     }
 
 

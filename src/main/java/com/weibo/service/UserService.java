@@ -43,4 +43,8 @@ public class UserService {
     public List<User> findByName(String name){
         return userDao.findByName(name);
     }
+
+    public Integer countByName(String name){
+        return userDao.countByName(name);
+    }
 }

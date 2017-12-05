@@ -15,9 +15,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MyWebApplicationConfig extends WebMvcConfigurerAdapter {	// 定义MVC配置
     @Override
     public void addInterceptors(InterceptorRegistry registry) {	// 进行拦截器的注册处理操作
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/index/**")
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/**")
                 .excludePathPatterns("/login")
-                .excludePathPatterns("register")
+                .excludePathPatterns("/register")
                 .excludePathPatterns("/api/login") ;	// 匹配路径
         super.addInterceptors(registry);
     }

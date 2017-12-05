@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
-        this.log.info("【*** LoginInterceptor.preHandle() ***】" + handlerMethod.getBean().getClass().getSimpleName());
+//        this.log.info("【*** LoginInterceptor.preHandle() ***】" + handlerMethod.getBean().getClass().getSimpleName());
         return true;    // 如果返回false表示不继续请求，如果返回true表示继续请求
     }
 
@@ -34,8 +35,15 @@ public class LoginInterceptor implements HandlerInterceptor {
                            ModelAndView modelAndView) throws Exception {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
 
-        this.log.info("【*** LoginInterceptor.postHandle() ***】" + handlerMethod.getBean().getClass().getSimpleName());
-        this.log.info("【*** LoginInterceptor.postHandle() ***】" + modelAndView);
+//        this.log.info("【*** LoginInterceptor.postHandle() ***】" + handlerMethod.getBean().getClass().getSimpleName());
+//        this.log.info("【*** LoginInterceptor.postHandle() ***】" + modelAndView);
+
+        if (nowsession(request).getAttribute("uid") == null){
+            this.log.info("未登录" + modelAndView);
+             response.sendRedirect("/login");
+        }else{
+            this.log.info("已登录" + modelAndView);
+        }
 
 //        response.sendRedirect("login");
         return;
@@ -45,7 +53,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        this.log.info("【*** LoginInterceptor.afterCompletion() ***】拦截处理完毕");
+//        this.log.info("【*** LoginInterceptor.afterCompletion() ***】拦截处理完毕");
+    }
+
+    public HttpSession nowsession(HttpServletRequest request){
+        return request.getSession();
     }
 
 

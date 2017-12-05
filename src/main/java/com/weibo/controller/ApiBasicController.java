@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/api" , method = RequestMethod.POST)
+@RequestMapping(value = "/api")
 public class ApiBasicController {
 
 }

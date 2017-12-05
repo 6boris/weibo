@@ -3,15 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <title>登录</title>
-
-
-
     <link rel="stylesheet" href="/index/css/login.css" />
     <script type="text/javascript" src='/index/js/jquery-1.7.2.min.js'></script>
-
-    <js file='./js/jquery-1.7.2.min.js'/>
-    <js file='./js/jquery-validate.js'/>
-    <js file='./js/login.js'/>
 </head>
 <body>
 <div id='top-bg'></div>
@@ -55,12 +48,17 @@
             },
             success:function(data){
                 data = $.parseJSON(data);
-                console.log(data);
-                console.log(data.data);
-                console.log($.parseJSON(data.data));
+
+                if(data.status == 0){
+                    alert(data.messages);
+                    window.location.href = "/index";
+                }else{
+                    alert(data.messages);
+
+                }
             },
             error: function(){
-
+                alert("系统错误");
             }
         });
     });

@@ -4,47 +4,72 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <title>注册</title>
     <link rel="stylesheet" href="/index/css/regis.css" />
-    <js file='/index/js/jquery-1.7.2.min.js'/>
-    <js file='/index/js/jquery-validate.js'/>
-    <script type='text/javascript'>
-        var checkAccount = "{:U('checkAccount')}";
-        var checkUname = "{:U('checkUname')}";
-        var checkVerify = "{:U('checkVerify')}";
-    </script>
-    <js file='/index/js/register.js'/>
+    <script type="text/javascript" src='/index/js/jquery-1.7.2.min.js'></script>
+
+    <!--<js file='/index/js/register.js'/>-->
 </head>
 <body>
 <div id='logo'></div>
 <div id='reg-wrap'>
-    <form action="{:U('runRegis')}" method='post' name='register'>
-        <fieldset>
-            <legend>用户注册</legend>
-            <p>
-                <label for="account">登录账号：</label>
-                <input type="text" name='account' id='account' class='input'/>
-            </p>
-            <p>
-                <label for="pwd">登录密码：</label>
-                <input type="password" name='pwd' id='pwd' class='input'/>
-            </p>
-            <p>
-                <label for="pwded">确认密码：</label>
-                <input type="password" name='pwded' class='input'/>
-            </p>
-            <p>
-                <label for="uname">昵称：</label>
-                <input type="text"  name='uname' id='uname' class='input'/>
-            </p>
-            <p>
-                <label for="verify">验证码：</label>
-                <input type="text" name='verify' class='input' id='verify'/>
-                <img src="{:U('verify')}" width='80' height='25' id='verify-img'/>
-            </p>
-            <p class='run'>
-                <input type="submit" value='马上注册' id='regis'/>
-            </p>
-        </fieldset>
-    </form>
+    <fieldset>
+        <legend>用户注册</legend>
+        <p>
+            <label for="account">登录账号：</label>
+            <input type="text" name='account' id='account' class='input'/>
+        </p>
+        <p>
+            <label for="pwd">登录密码：</label>
+            <input type="password" name='pwd' id='pwd' class='input'/>
+        </p>
+        <p>
+            <label for="pwded">确认密码：</label>
+            <input type="password" name='pwded' class='input'/>
+        </p>
+        <p>
+            <label for="uname">昵称：</label>
+            <input type="text"  name='uname' id='uname' class='input'/>
+        </p>
+        <!--<p>-->
+            <!--<label for="verify">验证码：</label>-->
+            <!--<input type="text" name='verify' class='input' id='verify'/>-->
+            <!--<img src="{:U('verify')}" width='80' height='25' id='verify-img'/>-->
+        <!--</p>-->
+        <p class='run'>
+            <input type="submit" value='马上注册' id="regis"/>
+        </p>
+    </fieldset>
+
+    <script>
+    $('#regis').click(function(){
+        //提交表单前的判断
+
+
+        $.ajax({
+            type:"POST",
+            url:"/api/register",
+            data:{
+                username:$("#account").val(),
+                password:$("#pwd").val(),
+                realname:$("#uname").val()
+            },
+            success:function(data){
+                data = $.parseJSON(data);
+
+                if(data.status == 0){
+                    alert(data.messages);
+                    window.location.href = "/index";
+                }else{
+                    alert(data.messages);
+
+                }
+            },
+            error: function(){
+                alert("系统错误");
+            }
+        });
+    })
+
+    </script>
 </div>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${users}"></title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>NAME</th>
+        <th>PRICE</th>
+        <th>IN STOCK</th>
+    </tr>
+    <tr th:each="userlist : ${users}">
+        <td th:text="${userlist.id}">Onions</td>
+        <td th:text="${userlist.username}">2.41</td>
+        <td th:text="${userlist.password}">yes</td>
+    </tr>
+</table>
+
+</body>
+</html>
